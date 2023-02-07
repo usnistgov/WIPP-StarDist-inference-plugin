@@ -1,0 +1,43 @@
+{
+    "name": "wipp/wipp-stardist-inference-plugin",
+    "version": "0.0.1",
+    "title": "WIPP StarDist inference plugin",
+    "description": "A WIPP Plugin for inferencing using StarDist 2D pretrained models",
+    "author": "Mylene Simon",
+    "institution": "National Institute of Standards and Technology",
+    "repository": "https://github.com/usnistgov/WIPP-StarDist-inference-plugin",
+    "website": "https://github.com/stardist/stardist",
+    "citation": "Uwe Schmidt, Martin Weigert, Coleman Broaddus, and Gene Myers. Cell Detection with Star-convex Polygons. International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), Granada, Spain, September 2018.",
+    "containerId": "wipp/wipp-stardist-inference-plugin:0.0.1",
+    "baseCommand": [],
+    "inputs": [{
+        "name": "inputImages",
+        "type": "collection",
+        "description": "Collection of images to process",
+        "required": true
+    }, {
+        "name": "pretrainedModel",
+        "type": "enum",
+        "description": "Pretrained model to use",
+        "required": true,
+        "options": {
+            "values": ["2D_versatile_fluo", "2D_paper_dsb2018", "2D_versatile_he"]
+        }
+    }],
+    "outputs": [{
+        "name": "output",
+        "type": "collection",
+        "description": "Output collection"
+    }],
+    "ui": [{
+        "key": "inputs.inputImages",
+        "title": "Input images",
+        "description": "Pick a collection...",
+        "hidden": false
+    }, {
+        "key": "inputs.pretrainedModel",
+        "title": "Pretrained model",
+        "description": "Pick a model from list",
+        "hidden": false
+    }]
+}
