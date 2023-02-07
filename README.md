@@ -13,7 +13,7 @@ The purpose of this work is to create a [WIPP](https://github.com/usnistgov/WIPP
 
 ###   Technical installation instructions, including operating system or software dependencies
 
-The project is leveraging numpy and opencv libraries. It has been developed on Windows 11.
+The code is written in Python 3 (tested on version 3.10) and leverages the tensorflow and stardist python packages.
 
 ## Installation (optional if using the pre-built Docker image)
 
@@ -58,7 +58,7 @@ wipp/wipp-stardist-inference-plugin:0.0.1 \
 ### Run the WIPP plugin
 	- register the plugin.json in a deployed WIPP instance - see https://github.com/usnistgov/WIPP
 	- upload input images as WIPP image collection
-	- create a workflow by adding one step called histogram equalization
+	- create a workflow by adding one step called stardist-inference
 	- run and monitor the workflow execution
 	- download resulting WIPP image colection
 
