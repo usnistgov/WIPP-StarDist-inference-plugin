@@ -2,7 +2,7 @@
 # NIST-developed software is expressly provided "AS IS." NIST MAKES NO WARRANTY OF ANY KIND, EXPRESS, IMPLIED, IN FACT OR ARISING BY OPERATION OF LAW, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT AND DATA ACCURACY. NIST NEITHER REPRESENTS NOR WARRANTS THAT THE OPERATION OF THE SOFTWARE WILL BE UNINTERRUPTED OR ERROR-FREE, OR THAT ANY DEFECTS WILL BE CORRECTED. NIST DOES NOT WARRANT OR MAKE ANY REPRESENTATIONS REGARDING THE USE OF THE SOFTWARE OR THE RESULTS THEREOF, INCLUDING BUT NOT LIMITED TO THE CORRECTNESS, ACCURACY, RELIABILITY, OR USEFULNESS OF THE SOFTWARE.
 # You are solely responsible for determining the appropriateness of using and distributing the software and you assume all risks associated with its use, including but not limited to the risks and costs of program errors, compliance with applicable laws, damage to or loss of data, programs or equipment, and the unavailability or interruption of operation. This software is not intended to be used in any situation where a failure could cause risk of injury or damage to property. The software developed by NIST employees is not subject to copyright protection within the United States.
 
-from stardist.models import StarDist2D
+from stardist.models import StarDist2D, StarDist3D
 from stardist.data import test_image_nuclei_2d
 from stardist.plot import render_label
 from csbdeep.utils import normalize
@@ -36,7 +36,10 @@ def main():
     print('output = {}'.format(output_folder))
     
     # Load pretrained model
-    model = StarDist2D.from_pretrained(pretrained_model)
+    if pretrained_model == '3D':
+        model = StarDist3D.from_pretrained("3D_demo")
+    else:
+        model = StarDist2D.from_pretrained(pretrained_model)
     
     # Get list of input images
     images = listdir(input_images)
@@ -52,7 +55,7 @@ def main():
         # Open current image
         image_data = imread(join(input_images, image))
         # Predict labels
-        labels, _ = model.predict_instances(normalize(image_data))
+        labels, _ = model.predict_instances(normalize(image_data), n_tiles=(1,4,4))
         # Save result as 16bit tiled tiff
         imwrite(join(output_folder, image), np.uint16(labels), tile=(1024,1024), compression='lzw')
         print('Done')
