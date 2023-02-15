@@ -55,9 +55,9 @@ def main():
         # Open current image
         image_data = imread(join(input_images, image))
         # Predict labels
-        labels, _ = model.predict_instances(normalize(image_data), n_tiles=(1,4,4))
+        labels, _ = model.predict_instances(normalize(image_data), axes='ZYX', n_tiles=(1,4,4))
         # Save result as 16bit tiled tiff
-        imwrite(join(output_folder, image), np.uint16(labels), tile=(1024,1024), compression='lzw')
+        imwrite(join(output_folder, image), np.uint16(image_data), tile=(1024,1024), compression='lzw', shape=image_data.shape, metadata={'axes': 'ZYX'})
         print('Done')
     print('*** Execution finished.')
 

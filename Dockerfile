@@ -12,7 +12,7 @@ RUN mkdir -p ${EXEC_DIR} \
     && mkdir -p ${DATA_DIR}/outputs
 
 # Install python libraries
-RUN pip install stardist imagecodecs
+RUN pip install stardist imagecodecs tifffile
 
 # Set Tensorflow threading options
 ENV TENSORFLOW_INTRA_OP_PARALLELISM=2
